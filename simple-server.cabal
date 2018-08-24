@@ -1,0 +1,31 @@
+name:          simple-web-server
+version:       0.1.0
+synopsis:      A simple web server
+author:        Jie Liu
+maintainer:    Jie Liu <liujie333333@gmail.com>
+copyright:     (c) Jimmy Tinsley
+license:       AGPL-3
+license-file:  LICENSE
+category:      Web
+build-type:    Simple
+cabal-version: >= 1.10
+description:   A simple web server
+
+library
+    default-language: Haskell2010
+    hs-source-dirs:   src
+    ghc-options:      -Wall -O2 -fwarn-tabs
+
+    exposed-modules:
+          Types
+          Main
+
+    build-depends:
+          aeson                 >= 0.6
+        , base                  >= 4.6    && < 5.0
+        , bytestring            >= 0.10
+        , text                  >= 0.11
+        , wai                   >= 3.0
+        , warp                  >= 3.0
+        , wai-util              >= 0.7
+        , http-types            >= 0.10
