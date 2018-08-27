@@ -1,0 +1,1 @@
+This folder is where database is stored. Please don't move or remove it. 
