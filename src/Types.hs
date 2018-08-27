@@ -19,11 +19,11 @@ data UserInformation = UserInformation
 
 --instance ToJSON UserInformation
 instance ToJSON UserInformation where
-    toJSON (UserInformation userName1 userPhone1 userEmail1 userMessage1) = 
-        object [ "name"    .= userName1 
-               , "phone"   .= userPhone1 
-               , "email"   .= userEmail1 
-               , "message" .= userMessage1 
+    toJSON (UserInformation userName' userPhone' userEmail' userMessage') = 
+        object [ "name"    .= userName' 
+               , "phone"   .= userPhone' 
+               , "email"   .= userEmail' 
+               , "message" .= userMessage' 
                ]
 
 --instance FromJSON UserInformation
