@@ -4,7 +4,7 @@ synopsis:      A simple web server
 author:        Jie Liu
 maintainer:    Jie Liu <liujie333333@gmail.com>
 copyright:     (c) Jimmy Tinsley
-license:       Aapche
+license:       Apache
 license-file:  LICENSE
 category:      Web
 build-type:    Simple
