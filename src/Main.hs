@@ -99,7 +99,7 @@ handlePostRequest req send = do
             insertUserInfo ui
             send $ responseLBS
                 status200
-                [("Content-Type", "text/plain; charset=utf-8")]
+                [("Content-Type", "text/plain; charset=utf-8"), ("Access-Control-Allow-Origin","*")]
                 "OK"
   where 
     decode1 :: S8.ByteString -> Maybe UserInformation
