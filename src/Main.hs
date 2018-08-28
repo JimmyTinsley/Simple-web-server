@@ -17,6 +17,7 @@ import Network.Wai
 import Network.Wai.Handler.Warp (run)
 import System.Environment (getArgs)
 import System.Directory (findFile)
+import Data.Maybe (isNothing)
 
 import qualified Data.ByteString.Lazy.Char8 as S8
 
@@ -25,7 +26,7 @@ main = do
     args <- getArgs
     let port = (read $ head args) :: Int 
     databaseDir <- findFile ["../../../db"] "UserInfo.db"
-    when (databaseDir == Nothing) createTables
+    when (isNothing databaseDir) createTables
     putStrLn "Server Started."
     run port app
     
