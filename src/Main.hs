@@ -62,7 +62,7 @@ handleGetRequest _ send = do
 
     send $ responseLBS 
             status200
-            [("Content-Type", "application/json; charset=utf-8")]
+            [("Content-Type", "application/json; charset=utf-8"),("Access-Control-Allow-Origin","*")]
             responseByteString
   where
     encode1 :: UserInformationList -> S8.ByteString
@@ -91,7 +91,7 @@ handlePostRequest req send = do
             putStrLn "usrInfo1 Nothing"
             send $ responseLBS
                 status400
-                [("Content-Type", "text/plain; charset=utf-8")]
+                [("Content-Type", "text/plain; charset=utf-8"), ("Access-Control-Allow-Origin","*")]
                 "Bad Request"
         Just ui -> do
             -- Print the UserInformation for debugging
