@@ -1,13 +1,15 @@
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE RecordWildCards            #-}
 
 module Types
     ( UserInformation (..)
     , UserInformationList (..)
     )where 
 
-import Data.Aeson
+import Data.Aeson 
 import Data.Text (Text)
+import Data.Time.Clock 
 import GHC.Generics (Generic)
 
 data UserInformation = UserInformation
@@ -15,15 +17,17 @@ data UserInformation = UserInformation
     , userPhone   :: !(Maybe Text)
     , userEmail   :: !(Maybe Text)
     , userMessage :: !Text
+    , timeStamp   :: !(Maybe UTCTime)
     } deriving (Show, Generic)
 
 --instance ToJSON UserInformation
 instance ToJSON UserInformation where
-    toJSON (UserInformation userName' userPhone' userEmail' userMessage') = 
-        object [ "name"    .= userName' 
-               , "phone"   .= userPhone' 
-               , "email"   .= userEmail' 
-               , "message" .= userMessage' 
+    toJSON UserInformation{..} = 
+        object [ "name"    .= userName 
+               , "phone"   .= userPhone 
+               , "email"   .= userEmail 
+               , "message" .= userMessage 
+               , "time"    .= timeStamp
                ]
 
 --instance FromJSON UserInformation
@@ -31,8 +35,9 @@ instance FromJSON UserInformation where
     parseJSON = withObject "UserInformation" $ \o -> 
         UserInformation <$> o .:  "name"
                         <*> o .:? "phone"
-                        <*> o .:?　"email"
-                        <*> o .: "message" 
+                        <*> o .:? "email"
+                        <*> o .:  "message" 
+                        <*> o .:? "time"
 
 
 newtype UserInformationList = UserInformationList
@@ -42,3 +47,4 @@ newtype UserInformationList = UserInformationList
 instance FromJSON UserInformationList
 
 instance ToJSON UserInformationList
+
