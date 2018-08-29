@@ -23,7 +23,7 @@ insertUserInfo :: UserInformation -> IO ()
 insertUserInfo UserInformation{..} = do 
     conn <- connectSqlite3 "../../../db/UserInfo.db"
     stmt <- prepare conn "INSERT OR IGNORE INTO UserInfo (name, phone, email, message) VALUES (?,?,?,?)" 
-    let sqlValues = map toSql [userName, fromMaybe (pack "") userPhone, userEmail, userMessage] 
+    let sqlValues = map toSql [userName, fromMaybe (pack "") userPhone, fromMaybe (pack "") userEmail, userMessage] 
     _ <- execute stmt sqlValues
     commit conn
 
@@ -38,7 +38,7 @@ getUserInfo = do
 transferValue :: [SqlValue] -> UserInformation
 transferValue s =  
     let textList = map f s 
-    in UserInformation (textList!!1) (Just (textList!!2)) (textList!!3) (textList!!4)
+    in UserInformation (textList!!1) (Just (textList!!2)) (Just (textList!!3)) (textList!!4)
   where
     f :: SqlValue -> Text
     f = fromSql 

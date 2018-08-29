@@ -13,7 +13,7 @@ import GHC.Generics (Generic)
 data UserInformation = UserInformation
     { userName    :: !Text
     , userPhone   :: !(Maybe Text)
-    , userEmail   :: !Text
+    , userEmail   :: !(Maybe Text)
     , userMessage :: !Text
     } deriving (Show, Generic)
 
@@ -31,7 +31,7 @@ instance FromJSON UserInformation where
     parseJSON = withObject "UserInformation" $ \o -> 
         UserInformation <$> o .:  "name"
                         <*> o .:? "phone"
-                        <*> o .:　"email"
+                        <*> o .:?　"email"
                         <*> o .: "message" 
 
 
