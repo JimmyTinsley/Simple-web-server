@@ -49,6 +49,3 @@ transferValue s =
         msgTime    = fromSql (s!!5) :: UTCTime
     in UserInformation usrName (Just usrPhone) (Just usrEmail) usrMessage (Just msgTime)
 
-
--- sampleUI :: UserInformation
--- sampleUI = UserInformation  (pack "Tinsley") Nothing (pack "123@123.com") (pack "hello world")
