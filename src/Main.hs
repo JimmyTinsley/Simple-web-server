@@ -1,9 +1,11 @@
+-- This is the main module of the program. Cabal will generate executable file from this main file.
+
 {-# LANGUAGE OverloadedStrings #-}
 --{-# LANGUAGE QuasiQuotes       #-}
 
 module Main 
     ( main
-    )where
+    ) where
 
 -- Other two modules of the program
 import Types 

@@ -1,11 +1,17 @@
+-- This file include UserInformation and UserInformationList data type declaration, and their FromJSON/ToJSON instances.
+
+-- Enable overloading od string literals using a type class, much like integer literals.
 {-# LANGUAGE OverloadedStrings          #-}
+-- This allows us to deriving Generic, and use auto-generated generic instances. 
 {-# LANGUAGE DeriveGeneric              #-}
+-- This allows us to write a data type like 'UserInformation{..}' when using it as the input of a function or instance, 
+-- then we can directly use its functions (userName, userPhone, etc.) as data instead using 'userName (ui :: UserInformation)'. see #31
 {-# LANGUAGE RecordWildCards            #-}
 
 module Types
     ( UserInformation (..)
     , UserInformationList (..)
-    )where 
+    ) where 
 
 import Data.Aeson 
 import Data.Text (Text)
@@ -18,7 +24,7 @@ data UserInformation = UserInformation
     , userEmail   :: !(Maybe Text)
     , userMessage :: !Text
     , timeStamp   :: !(Maybe UTCTime)
-    } deriving (Show, Generic)
+    } deriving (Show)
 
 --instance ToJSON UserInformation
 instance ToJSON UserInformation where
