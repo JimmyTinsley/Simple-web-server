@@ -77,7 +77,7 @@ handleGetRequest _ send = do   -- we don't need anything other thing in the requ
     let responseByteString = encode usrInfoList :: S8.ByteString
 
     -- Show the json information in log
-    putStrLn $ S8.unpack responseByteString
+    -- putStrLn $ S8.unpack responseByteString ------------ Set Optional
 
     -- Send the json as response, 200 OK
     send $ responseLBS 
@@ -94,15 +94,11 @@ handlePostRequest req send = do
     reqBdy <- lazyRequestBody req 
 
     -- Show the  requst body in log
-    putStrLn $ S8.unpack reqBdy
-
-    -- For some unknown reasons(maybe something about charset encode?), we need to pack and
-    -- unpack the ByteString, and then pass it to decode function to make it work normally
-    let requestByteString = S8.pack $ S8.unpack reqBdy 
+    -- putStrLn $ S8.unpack reqBdy ------------ Set Optional 
 
     -- Decode the ByteString into UserInformation
     -- Notice: 'decode' function may fail, that's why we need Maybe 
-    let usrInfo = decode requestByteString :: Maybe UserInformation
+    let usrInfo = decode reqBdy :: Maybe UserInformation
     
     -- If decode success, then return 200 OK, else return 400 Bad Request
     case usrInfo of 
