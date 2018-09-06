@@ -69,8 +69,8 @@ app req send =
 
 -- Handle "Get" request
 handleGetRequest :: Application
-handleGetRequest _ send = do   -- we don't need anything other thing in the request header or body
-    -- Get the Users' Information (as :t UserInformationList) from database 
+handleGetRequest _ send = do   -- we don't need any other thing in the request header or body
+    -- Get the Users' Information (as UserInformationList type) from database 
     usrInfoList <- getUserInfo  
 
     -- Encode them in standard json format.  UserInformationList -> Data.ByteString.Lazy.Char8.ByteString
@@ -82,11 +82,8 @@ handleGetRequest _ send = do   -- we don't need anything other thing in the requ
     -- Send the json as response, 200 OK
     send $ responseLBS 
             status200
-            [("Content-Type", "application/json; charset=utf-8"),("Access-Control-Allow-Origin","*")]
+            [("Content-Type", "application/json; charset=utf-8"), ("Access-Control-Allow-Origin", "*")]
             responseByteString
-
-
-
 
 handlePostRequest :: Application 
 handlePostRequest req send = do
@@ -94,7 +91,7 @@ handlePostRequest req send = do
     reqBdy <- lazyRequestBody req 
 
     -- Show the  requst body in log
-    -- putStrLn $ S8.unpack reqBdy ------------ Set Optional 
+    -- putStrLn $ S8.unpack reqBdy             ------------ Set Optional 
 
     -- Decode the ByteString into UserInformation
     -- Notice: 'decode' function may fail, that's why we need Maybe 
