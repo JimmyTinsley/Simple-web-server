@@ -39,7 +39,7 @@ insertUserInfo UserInformation{..} = do
     _ <- execute stmt sqlValues
     commit conn
 
--- Function used to get data from database and save them in UserInformationList type. 
+-- Function used to fetch data from database and save them in `UserInformationList` type. 
 getUserInfo :: IO UserInformationList
 getUserInfo = do 
     conn <- connectSqlite3 "../../../db/UserInfo.db"
@@ -48,7 +48,7 @@ getUserInfo = do
     disconnect conn
     return $ UserInformationList userInfoList
 
--- Function used to do some important data type transformation
+-- Function used to do data type transformation
 transformValue :: [SqlValue] -> UserInformation
 transformValue s =  
     let 
@@ -58,4 +58,4 @@ transformValue s =
         usrMessage = fromSql (s!!4) :: Text
         msgTime    = fromSql (s!!5) :: UTCTime
     in UserInformation usrName (Just usrPhone) (Just usrEmail) usrMessage (Just msgTime)
-    -- Use "let ... in ..." instead of "do ... where ..." because there is not IO in this function
+    -- Use "let ... in ..." instead of "do ... where ..." since there is no IO in this function
