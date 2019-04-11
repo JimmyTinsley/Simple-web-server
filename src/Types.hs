@@ -5,7 +5,7 @@
 -- This allows us to deriving Generic, and use auto-generated generic instances. 
 {-# LANGUAGE DeriveGeneric              #-}
 -- This allows us to write a data type like 'UserInformation{..}' when using it as the input of a function or instance, 
--- then we can directly use its functions (userName, userPhone, etc.) as data instead using 'userName (ui :: UserInformation)'. see #31
+-- then we can directly use its functions (userName, userPhone, etc.) as data instead using 'userName (ui :: UserInformation)'. see line 31
 {-# LANGUAGE RecordWildCards            #-}
 
 module Types
